@@ -1,26 +1,51 @@
-// even numbers [1, 2, 3, 4, 5] => [2, 4]
-const filterEvenNumbers = function (numbers) { };
-
-// words with more than 5 letters ["apple", "banana", "kiwi", "grape"] => ["banana"]
-const filterLongWords = function (words) { };
-
-// people older than 30 [{name: "Alice", age: 25}, {name: "Bob", age: 35}] => [{name: "Bob", age: 35}]
-const filterAdults = function (people) { };
-
-// active users [{username: "alice", active: true}, {username: "bob", active: false}] => [{username: "alice", active: true}]
-const filterActiveUsers = function (users) { };
-
-// numbers greater than 10 [5, 12, 7, 18, 3] => [12, 18]
-const filterNumbersGreaterThanTen = function (numbers) { };
-
-// books with more than 200 pages [{title: "Book 1", pages: 150}, {title: "Book 2", pages: 250}] => [{title: "Book 2", pages: 250}]
-const filterLongBooks = function (books) { };
-
-// users with incomplete profiles [{username: "alice", profileComplete: true}, {username: "bob", profileComplete: false}] => [{username: "bob", profileComplete: false}]
-const filterIncompleteProfiles = function (users) { };
-
-// students with grades above 80 [{name: "John", grade: 75}, {name: "Jane", grade: 85}] => [{name: "Jane", grade: 85}]
-const filterHighGrades = function (students) { };
+const filterEvenNumbers = function (numbers) {
+  return numbers.filter(function (number) {
+    return (number & 1) === 0;
+  });
+};
+//-----------------------------------------------------------------------------
+const filterLongWords = function (words) {
+  return words.filter(function (word) {
+    return word.length > 5;
+  });
+};
+//-----------------------------------------------------------------------------
+const filterAdults = function (people) {
+  return people.filter(function (person) {
+    return person.age > 30;
+  });
+};
+//-----------------------------------------------------------------------------
+const filterActiveUsers = function (users) {
+  return users.filter(function (user) {
+    return user.active;
+  });
+};
+//-----------------------------------------------------------------------------
+const filterNumbersGreaterThanTen = function (numbers) {
+  return numbers.filter(function (number) {
+    return number > 10;
+  });
+};
+//-----------------------------------------------------------------------------
+const filterLongBooks = function (books) {
+  return books.filter(function (book) {
+    return book.pages > 200;
+  });
+};
+//-----------------------------------------------------------------------------
+const filterIncompleteProfiles = function (users) {
+  return users.filter(function (user) {
+    return !user.profileComplete;
+  });
+};
+//-----------------------------------------------------------------------------
+const filterHighGrades = function (students) {
+  return students.filter(function (student) {
+    return student.grade > 80;
+  });
+};
+//-----------------------------------------------------------------------------
 
 // products that are in stock [{product: "apple", inStock: true}, {product: "banana", inStock: false}] => [{product: "apple", inStock: true}]
 const filterInStockProducts = function (products) { };
@@ -188,7 +213,7 @@ const filterStudentsByGrade = function (students, minGrade) { };
 const filterBooksByAward = function (books, award) { };
 
 // Filter users where at least one post has more than a specific number of likes [{user: {name: "John", posts: [{title: "Post 1", likes: 150}, {title: "Post 2", likes: 20}]}}] => [{user: {name: "John", posts: [{title: "Post 1", likes: 150}, {title: "Post 2", likes: 20}]}}]
-const filterUsersByPostLikes = function (users, minLikes) { };
+const filterUsersByPostLikes2 = function (users, minLikes) { };
 
 // Filter cities where at least one attraction is in a specific category [{city: {name: "Paris", attractions: [{name: "Eiffel Tower", category: "landmark"}, {name: "Louvre", category: "museum"}]}}] => [{city: {name: "Paris", attractions: [{name: "Eiffel Tower", category: "landmark"}, {name: "Louvre", category: "museum"}]}}]
 const filterCitiesByAttractionCategory = function (cities, category) { };
@@ -215,7 +240,7 @@ const filterUsersByPostComments = function (users, minComments) { };
 const filterUsersByPostCategory = function (users, category) { };
 
 // Filter users who have a certain number of followers and have posted in the last 30 days [{user: {name: "Tom", followers: 1000, lastPostDate: "2024-11-10"}}] => [{user: {name: "Tom", followers: 1000, lastPostDate: "2024-11-10"}}]
-const filterActiveUsers = function (users, minFollowers, daysAgo) { };
+const filterActiveUsers2 = function (users, minFollowers, daysAgo) { };
 
 // Filter posts that have at least one hashtag from a list of trending hashtags [{post: {title: "Post 1", hashtags: ["#food", "#vegan"]}}] => [{post: {title: "Post 1", hashtags: ["#food", "#vegan"]}}]
 const filterPostsByHashtags = function (posts, trendingHashtags) { };
@@ -336,4 +361,6 @@ const findInStockItems = function (items, lookup) { };
 // Find animals whose habitat matches the required type from the lookup object.
 // Input: ["Lion", "Elephant", "Shark"], { "Lion": { habitat: "Jungle" }, "Elephant": { habitat: "Jungle" }, "Shark": { habitat: "Ocean" } } , "Jungle"
 // Output: ["Lion", "Elephant"]
-const findAnimalsByHabitat = function (animals, lookup) { };
+const findAnimalsByHabitat = function (animals, lookup) {
+
+};
