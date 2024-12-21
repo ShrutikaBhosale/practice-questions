@@ -38,11 +38,13 @@ const truthValuesOf = function (numbers) {
   return truthValues;
 };
 //----------------------------------------------------------------------------
-const reversedStringsOf = function (strings) {
-  const reversedStrings = strings.map(function (string) {
-    return [...string].reverse().join('');
-  });
+const reverseWord = function (word) {
+  const [...chars] = word;
+  return chars.reverse().join('');
+};
 
+const reversedStringsOf = function (strings) {
+  const reversedStrings = strings.map(reverseWord);
   return reversedStrings;
 };
 //----------------------------------------------------------------------------
@@ -125,19 +127,44 @@ const withoutVowelsOf = function (strings) {
     }, '');
   });
 };
-// cumulative sums of [[1, 2, 3], [4, 5, 6]] => [[1, 3, 6], [4, 9, 15]]
-// Example: cumulative sum of [1, 2, 3] is [1, 1+2, 1+2+3]
-const cumulativeSumsOf = function (arrays) { };
+//----------------------------------------------------------------------------
+const getCumulativeSum = function (array) {
+  const cumulativeSum = array.reduce(function (sum, number) {
+    sum.push(sum.at(-1) + number);
+    return sum;
+  }, [0]);
 
-// reverse words in ["hello world", "goodbye moon"] => ["olleh dlrow", "eybdoog noom"]
-const reversedWordsOf = function (strings) { };
+  cumulativeSum.shift();
+  return cumulativeSum;
+};
 
+const cumulativeSumsOf = function (arrays) {
+  return arrays.map(getCumulativeSum);
+};
+//----------------------------------------------------------------------------
+const reversedWordsOf = function (strings) {
+  return strings.map(function (string) {
+    const words = string.split(' ');
+    return words.map(reverseWord).join(' ');
+  });
+};
+//----------------------------------------------------------------------------
 // extract unique characters from ["apple", "banana", "grape"] => ["apl", "ban", "gra"]
 // Maintain the order of their first appearance in each string
 const uniqueCharactersOf = function (strings) { };
+//----------------------------------------------------------------------------
+const range = function (numOfElement) {
+  const numbers = [];
+  for (let index = 0; index < numOfElement; index++) {
+    numbers.push(index);
+  }
+  return numbers;
+};
 
-// generate ranges from [3, 5, 2] => [[0, 1, 2], [0, 1, 2, 3, 4], [0, 1]]
-const rangesOf = function (numbers) { };
+const rangesOf = function (numbers) {
+  return numbers.map(range);
+};
+//----------------------------------------------------------------------------
 
 // capitalize first letters of ["hello world", "goodbye moon"] => ["Hello World", "Goodbye Moon"]
 const capitalizedFirstLettersOf = function (strings) { };
