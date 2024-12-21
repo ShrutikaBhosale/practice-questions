@@ -72,10 +72,9 @@ const charCodesOf = function (strings) {
 };
 //----------------------------------------------------------------------------
 const domainNamesOf = function (emails) {
-  const domains = emails.map(function (email) {
+  return emails.map(function (email) {
     return email.slice(email.indexOf('@') + 1);
   });
-  return domains;
 };
 //----------------------------------------------------------------------------
 const splitWordsOf = function (strings) {

@@ -111,27 +111,54 @@ const concatenateNames = function (names) {
   }, '');
 };
 //------------------------------------------------------------------------------
-// countVowelsInWords(["hello", "world"]) => "eoo"
-const countVowelsInWords = function (words) { };
+function concatenatedVowels(word) {
+  return [...word].reduce(function (vowelInStr, char) {
+    const vowels = 'aeiouAEIOU';
+    return vowels.includes(char) ? vowelInStr + char : vowelInStr;
+  }, '');
+}
 
-// makeCamelCase(["hello", "world", "how", "are", "you"]) => "helloWorldHowAreYou"
-const makeCamelCase = function (words) { };
-
-// reverseString(["apple", "banana", "cherry"]) => "elppaananabyrrehc"
-const reverseString = function (words) { };
-
-// duplicateNumbers([1, 2, 3]) => [1, 1, 2, 2, 3, 3]
-const duplicateNumbers = function (numbers) { };
-
-// concatenateArrays([[1, 2], [3, 4], [5, 6]]) => [1, 2, 3, 4, 5, 6]
-const concatenateArrays = function (arrays) { };
-
-// flattenArray([[1, 2], [3, 4], [5, 6]]) => [1, 2, 3, 4, 5, 6]
-const flattenArray = function (arrays) { };
-
-// uniqueNumbers([1, 2, 2, 3, 4, 4, 5]) => [1, 2, 3, 4, 5]
-const uniqueNumbers = function (numbers) { };
-
+const countVowelsInWords = function (words) {
+  return words.reduce(function (vowelStr, word) {
+    return vowelStr + concatenatedVowels(word);
+  }, '');
+};
+//------------------------------------------------------------------------------
+const makeCamelCase = function (words) {
+  return words.reduce(function (CamelCaseStr, word) {
+    return CamelCaseStr + word[0].toUpperCase() + word.slice(1);
+  }, '');
+};
+//------------------------------------------------------------------------------
+const reverseString = function (words) {
+  return words.reduce(function (reversedStr, word) {
+    return reversedStr + [...word].reverse().join('');
+  }, '');
+};
+//------------------------------------------------------------------------------
+const duplicateNumbers = function (numbers) {
+  return numbers.map(function (number) {
+    return [number, number];
+  }).flat();
+};
+//------------------------------------------------------------------------------
+const concatenateArrays = function (arrays) {
+  return arrays.flat();
+};
+//------------------------------------------------------------------------------
+const flattenArray = function (arrays) {
+  return arrays.flat();
+};
+//------------------------------------------------------------------------------
+const uniqueNumbers = function (numbers) {
+  return numbers.reduce(function (uniqueNums, number) {
+    if (!uniqueNums.includes(number)) {
+      uniqueNums.push(number);
+    }
+    return uniqueNums;
+  }, []);
+};
+//------------------------------------------------------------------------------
 // groupByLength(["apple", "banana", "cherry", "date"]) => { 5: ["apple", "cherry"], 6: ["banana"], 4: ["date"] }
 const groupByLength = function (strings) { };
 
