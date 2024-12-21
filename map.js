@@ -38,13 +38,10 @@ const truthValuesOf = function (numbers) {
   return truthValues;
 };
 //----------------------------------------------------------------------------
-const reverseWord = function (word) {
-  const [...chars] = word;
-  return chars.reverse().join('');
-};
-
 const reversedStringsOf = function (strings) {
-  const reversedStrings = strings.map(reverseWord);
+  const reversedStrings = strings.map(function (str) {
+    return [...str].reverse().join('');
+  });
   return reversedStrings;
 };
 //----------------------------------------------------------------------------
@@ -145,7 +142,9 @@ const cumulativeSumsOf = function (arrays) {
 const reversedWordsOf = function (strings) {
   return strings.map(function (string) {
     const words = string.split(' ');
-    return words.map(reverseWord).join(' ');
+    return words.map(function (str) {
+      return [...str].reverse().join('');
+    });
   });
 };
 //----------------------------------------------------------------------------
