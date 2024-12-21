@@ -46,27 +46,44 @@ const filterHighGrades = function (students) {
   });
 };
 //-----------------------------------------------------------------------------
-
-// products that are in stock [{product: "apple", inStock: true}, {product: "banana", inStock: false}] => [{product: "apple", inStock: true}]
-const filterInStockProducts = function (products) { };
-
-// orders placed in the last 30 days [{orderDate: "2024-11-01"}, {orderDate: "2024-12-01"}] => [{orderDate: "2024-12-01"}]
-const filterRecentOrders = function (orders) { };
-
+const filterInStockProducts = function (products) {
+  return products.filter(function (product) {
+    return product.inStock;
+  });
+};
+//-----------------------------------------------------------------------------
+const filterRecentOrders = function (orders) {
+  return orders.filter(function (order) {
+    return order.orderDate > '2024-11-21';
+  });
+};
+//-----------------------------------------------------------------------------
 // products with a price lower than the average [{name: "item1", price: 10}, {name: "item2", price: 20}, {name: "item3", price: 5}] => [{name: "item1", price: 10}, {name: "item3", price: 5}]
 const filterBelowAveragePrice = function (products) { };
-
-// active users who posted in the last 7 days [{username: "alice", lastPostDate: "2024-12-01", active: true}, {username: "bob", lastPostDate: "2024-11-20", active: true}] => [{username: "alice", lastPostDate: "2024-12-01", active: true}]
-const filterRecentActiveUsers = function (users) { };
-
-// students who passed all subjects [{name: "John", subjects: [{name: "Math", passed: true}, {name: "Science", passed: true}]}, {name: "Jane", subjects: [{name: "Math", passed: false}, {name: "Science", passed: true}]}] => [{name: "John", subjects: [{name: "Math", passed: true}, {name: "Science", passed: true}]}]
-const filterStudentsWithAllSubjectsPassed = function (students) { };
-
-// people whose birthday is this month [{name: "Alice", birthDate: "2024-12-01"}, {name: "Bob", birthDate: "2024-11-01"}] => [{name: "Alice", birthDate: "2024-12-01"}]
-const filterBirthdaysThisMonth = function (people) { };
-
+//-----------------------------------------------------------------------------
+const filterRecentActiveUsers = function (users) {
+  return users.filter(function (user) {
+    return user.active && user.lastPostDate > '2024-11-30';
+  });
+};
+//-----------------------------------------------------------------------------
+const filterStudentsWithAllSubjectsPassed = function (students) {
+  return students.filter(function (student) {
+    return student.subjects.every(function (subject) {
+      return subject.passed;
+    });
+  });
+};
+//-----------------------------------------------------------------------------
+const filterBirthdaysThisMonth = function (people) {
+  return people.filter(function (person) {
+    return (person.birthDate.slice(5, 7)) === '12';
+  });
+};
+//-----------------------------------------------------------------------------
 // orders that exceed the average order value [{orderId: 1, amount: 20}, {orderId: 2, amount: 50}, {orderId: 3, amount: 10}] => [{orderId: 2, amount: 50}]
 const filterHighValueOrders = function (orders) { };
+//-----------------------------------------------------------------------------
 
 // books with reviews higher than the average rating [{title: "Book 1", rating: 4}, {title: "Book 2", rating: 5}, {title: "Book 3", rating: 3}] => [{title: "Book 2", rating: 5}]
 const filterTopRatedBooks = function (books) { };
