@@ -81,18 +81,57 @@ const filterBirthdaysThisMonth = function (people) {
   });
 };
 //-----------------------------------------------------------------------------
-// orders that exceed the average order value [{orderId: 1, amount: 20}, {orderId: 2, amount: 50}, {orderId: 3, amount: 10}] => [{orderId: 2, amount: 50}]
-const filterHighValueOrders = function (orders) { };
+const averageOf = function (orders, property) {
+  return orders.reduce(function (sum, order) {
+    return sum + order[property];
+  }, 0) / orders.length;
+};
+
+const filterHighValueOrders = function (orders) {
+  const average = averageOf(orders, 'amount').toFixed(2);
+
+  return orders.filter(function (order) {
+    return order.amount > average;
+  });
+};
 //-----------------------------------------------------------------------------
+const filterTopRatedBooks = function (books) {
+  const average = averageOf(books, 'rating').toFixed(2);
 
-// books with reviews higher than the average rating [{title: "Book 1", rating: 4}, {title: "Book 2", rating: 5}, {title: "Book 3", rating: 3}] => [{title: "Book 2", rating: 5}]
-const filterTopRatedBooks = function (books) { };
-
+  return books.filter(function (book) {
+    return book.rating > average;
+  });
+};
+//-----------------------------------------------------------------------------
 // employees whose salary is higher than the department average [{name: "Alice", salary: 5000, department: "HR"}, {name: "Bob", salary: 7000, department: "HR"}, {name: "Charlie", salary: 4000, department: "IT"}] => [{name: "Bob", salary: 7000, department: "HR"}]
 const filterHighSalaryEmployees = function (employees) { };
 
 // cities with a population higher than the median [{name: "City A", population: 2000}, {name: "City B", population: 5000}, {name: "City C", population: 3000}] => [{name: "City B", population: 5000}]
-const filterCitiesAboveMedianPopulation = function (cities) { };
+const extractPopulation = function (cities) {
+  const populations = cities.filter(function (city) {
+    return city.population;
+  });
+  return populations.sort(function (a, b) {
+    return a - b;
+  });
+};
+
+const findMedian = function (cities) {
+  const populations = extractPopulation(cities);
+  const middle = Math.ceil(populations.length / 2);
+
+  if (populations.length % 2 === 0) {
+    return Math.round((populations[middle] + populations[middle + 1])) / 2;
+  }
+
+  return populations[middle];
+};
+const filterCitiesAboveMedianPopulation = function (cities) {
+  const median = findMedian(cities);
+  return cities.filter(function (city) {
+    return city.population > median;
+  });
+};
 
 // posts with more than the average number of likes [{postId: 1, likes: 100}, {postId: 2, likes: 200}, {postId: 3, likes: 150}] => [{postId: 2, likes: 200}]
 const filterPopularPosts = function (posts) { };
