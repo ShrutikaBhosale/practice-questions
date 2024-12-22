@@ -203,10 +203,7 @@ const zip = function (keys, values) {
 };
 //------------------------------------------------------------------------------
 const makeObject = function (keys, values) {
-  return keys.reduce(function (object, key, index) {
-    object[key] = values[index];
-    return object;
-  }, {});
+  return zip(keys, values);
 };
 //------------------------------------------------------------------------------
 const invertObject = function (obj) {
@@ -234,30 +231,40 @@ const groupByProperty = function (objects) { };
 // ascendingGroups([1,2,3,4,3,4,5,10,6,7,8,9]) => [[1,2,3,4],[3,4,5],[10],[6,7,8,9]]
 const ascendingGroups = function (numbers) { };
 //------------------------------------------------------------------------------
-// flattenToObject([['a', 1], ['b', 2], ['c', 3]]) => { a: 1, b: 2, c: 3 }
 const flattenToObject = function (pairs) {
   return merge(pairs, {});
 };
 //------------------------------------------------------------------------------
-
-// longestString(["apple", "banana", "cherry", "dates"]) => "banana"
-const longestString = function (strings) { };
-
+const longestString = function (strings) {
+  return longestWord(strings);
+};
+//------------------------------------------------------------------------------
 // mergeIntervals([[1,3], [2,4], [5,7]]) => [[1, 4], [5, 7]]
 const mergeIntervals = function (intervals) { };
+//------------------------------------------------------------------------------
+const sumAndCount = function (numbers) {
+  const sum = sumOf(numbers);
+  return { sum: sum, count: numbers.length };
+};
+//------------------------------------------------------------------------------
+const deepFlatten = function (arr) {
+  return arr.flat(Infinity);
+};
+//------------------------------------------------------------------------------
+const findMax = function (numbers) {
+  return maxOf(numbers);
+};
+//------------------------------------------------------------------------------
+const cumulativeSum = function (numbers) {
+  const cumulativeSum = numbers.reduce(function (sum, number) {
+    sum.push(sum.at(-1) + number);
+    return sum;
+  }, [0]);
 
-// sumAndCount([1, 2, 3, 4]) => { sum: 10, count: 4 }
-const sumAndCount = function (numbers) { };
-
-// deepFlatten([[1,2], [3,4, [5,6]], 7]) => [1,2,3,4,5,6,7]
-const deepFlatten = function (arr) { };
-
-// findMax([1, 2, 3, 4, 5]) => 5
-const findMax = function (numbers) { };
-
-// cumulativeSum([1,2,3,4]) => [1, 3, 6, 10]
-const cumulativeSum = function (numbers) { };
-
+  cumulativeSum.shift();
+  return cumulativeSum;
+};
+//------------------------------------------------------------------------------
 // equalChunksOfAtLeast([1, 1, 1, 2, 2, 5, 1, 1]) => [[1,1,1], [2,2], [1,1]]
 const equalChunksOfAtLeast = function (numbers) { };
 
