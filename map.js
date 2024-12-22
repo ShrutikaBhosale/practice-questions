@@ -335,18 +335,38 @@ const longestString = function (words) {
 
 const normalizeStringLengths = function (strings) {
   const longestStrLength = longestString(strings).length;
+
   return strings.map(function (word) {
     return word.padEnd(longestStrLength);
   });
 };
 //----------------------------------------------------------------------------
 // normalize strings by centering them based on the longest string length in ["cat", "elephant", "dog"] => ["  cat   ", "elephant", "  dog   "]
-// (pad with spaces to justify to the center)
-const centerJustifyStrings = function (strings) { };
+// (pad with spaces to justify to the center) 
+const centerJustifyStrings = function (strings) { //remaining -->
+  const longestStrLength = longestString(strings).length;
 
-// scale all numbers proportionally so the largest number becomes 100 in [20, 50, 80] => [25, 62.5, 100]
-const scaleToMax100 = function (numbers) { };
+  return strings.map(function (word) {
+    const spacesToPadStart = Math.floor((longestStrLength - word.length) / 2);
+    return word.padStart(spacesToPadStart);
+  });
+};
+//----------------------------------------------------------------------------
+const maxOf = function (numbers) {
+  return numbers.reduce(function (max, number) {
+    return number > max ? number : max;
+  }, -Infinity);
+};
 
+const scaleToMax100 = function (numbers) {
+  const largestNum = maxOf(numbers);
+  const scalingFactor = 100 / largestNum;
+
+  return numbers.map(function (num) {
+    return num * scalingFactor;
+  });
+};
+//----------------------------------------------------------------------------
 // map each number to the difference between it and the average of the array in [10, 20, 30] => [-10, 0, 10]
 const differencesFromMean = function (numbers) { };
 
