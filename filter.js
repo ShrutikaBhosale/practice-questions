@@ -107,30 +107,8 @@ const filterTopRatedBooks = function (books) {
 const filterHighSalaryEmployees = function (employees) { };
 
 // cities with a population higher than the median [{name: "City A", population: 2000}, {name: "City B", population: 5000}, {name: "City C", population: 3000}] => [{name: "City B", population: 5000}]
-const extractPopulation = function (cities) {
-  const populations = cities.filter(function (city) {
-    return city.population;
-  });
-  return populations.sort(function (a, b) {
-    return a - b;
-  });
-};
-
-const findMedian = function (cities) {
-  const populations = extractPopulation(cities);
-  const middle = Math.ceil(populations.length / 2);
-
-  if (populations.length % 2 === 0) {
-    return Math.round((populations[middle] + populations[middle + 1])) / 2;
-  }
-
-  return populations[middle];
-};
 const filterCitiesAboveMedianPopulation = function (cities) {
-  const median = findMedian(cities);
-  return cities.filter(function (city) {
-    return city.population > median;
-  });
+
 };
 
 // posts with more than the average number of likes [{postId: 1, likes: 100}, {postId: 2, likes: 200}, {postId: 3, likes: 150}] => [{postId: 2, likes: 200}]
