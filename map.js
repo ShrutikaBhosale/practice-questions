@@ -1,74 +1,60 @@
 const squaresOf = function (numbers) {
-  const squares = numbers.map(function (num) {
+  return numbers.map(function (num) {
     return Math.pow(num, 2);
   });
-
-  return squares;
 };
 //----------------------------------------------------------------------------
 const lengthsOf = function (strings) {
-  const lengths = strings.map(function (string) {
+  return strings.map(function (string) {
     return string.length;
   });
-
-  return lengths;
 };
 //----------------------------------------------------------------------------
 const uppercaseOf = function (strings) {
-  const uppercaseStrings = strings.map(function (string) {
+  return strings.map(function (string) {
     return string.toUpperCase();
   });
-
-  return uppercaseStrings;
 };
 //----------------------------------------------------------------------------
 const firstCharactersOf = function (strings) {
-  const firstCharacters = strings.map(function (string) {
+  return strings.map(function (string) {
     return string[0];
   });
-
-  return firstCharacters;
 };
 //----------------------------------------------------------------------------
 const truthValuesOf = function (numbers) {
-  const truthValues = numbers.map(function (number) {
+  return numbers.map(function (number) {
     return Boolean(number);
     // return !!number;
   });
-  return truthValues;
 };
 //----------------------------------------------------------------------------
 const reversedStringsOf = function (strings) {
-  const reversedStrings = strings.map(function (str) {
+  return strings.map(function (str) {
     return [...str].reverse().join('');
   });
-  return reversedStrings;
 };
 //----------------------------------------------------------------------------
-const doubleLettersOf = function (strings) { };
-function abc(strings) {
-  return strings.map(function (string) {
-    const [...str] = string;
-    return str.map(function (char) {
-      return char + char;
-    }).join('');
-  });
+function doubleLetter(string) {
+  return [...string].map(function (char) {
+    return char + char;
+  }).join('');
 }
+
+const doubleLettersOf = function (strings) {
+  return strings.map(doubleLetter);
+};
 //----------------------------------------------------------------------------
 const negatedBooleansOf = function (booleans) {
-  const negatedBooleans = booleans.map(function (value) {
+  return booleans.map(function (value) {
     return !value;
   });
-
-  return negatedBooleans;
 };
 //----------------------------------------------------------------------------
 const charCodesOf = function (strings) {
-  const codes = strings.map(function (char) {
+  return strings.map(function (char) {
     return char.charCodeAt();
   });
-
-  return codes;
 };
 //----------------------------------------------------------------------------
 const domainNamesOf = function (emails) {
@@ -100,12 +86,15 @@ const isVowel = function (char) {
   return vowels.includes(char);
 };
 
+const countVowel = function (string) {
+  return [...string].reduce(function (count, char) {
+    return isVowel(char) ? count + 1 : count;
+  }, 0);
+};
+
 const countVowelsOf = function (strings) {
   return strings.map(function (string) {
-    const [...chars] = string;
-    return chars.reduce(function (count, char) {
-      return isVowel(char) ? count + 1 : count;
-    }, 0);
+    return countVowel(string);
   });
 };
 //----------------------------------------------------------------------------
@@ -115,17 +104,20 @@ const reversedArraysOf = function (arrays) {
   });
 };
 //----------------------------------------------------------------------------
+const extractStrWithoutVowel = function (string) {
+  return [...string].reduce(function (strWithoutVowels, char) {
+    return !isVowel(char) ? strWithoutVowels + char : strWithoutVowels;
+  }, '');
+};
+
 const withoutVowelsOf = function (strings) {
   return strings.map(function (string) {
-    const [...chars] = string;
-    return chars.reduce(function (strWithoutVowels, char) {
-      return !isVowel(char) ? strWithoutVowels + char : strWithoutVowels;
-    }, '');
+    return extractStrWithoutVowel(string);
   });
 };
 //----------------------------------------------------------------------------
 const getCumulativeSum = function (array) {
-  const cumulativeSum = array.reduce(function (sum, number) {
+  const cumulativeSum = array.reduce(function (sum, number) { //dirty code change it
     sum.push(sum.at(-1) + number);
     return sum;
   }, [0]);
@@ -138,18 +130,27 @@ const cumulativeSumsOf = function (arrays) {
   return arrays.map(getCumulativeSum);
 };
 //----------------------------------------------------------------------------
-const reversedWordsOf = function (strings) {
-  return strings.map(function (string) {
-    const words = string.split(' ');
-    return words.map(function (str) {
-      return [...str].reverse().join('');
-    });
+const reverseWord = function (string) {
+  const words = string.split(' ');
+
+  return words.map(function (str) {
+    return [...str].reverse().join('');
   });
 };
+
+const reversedWordsOf = function (strings) {
+  return strings.map(reverseWord);
+};
 //----------------------------------------------------------------------------
-// extract unique characters from ["apple", "banana", "grape"] => ["apl", "ban", "gra"]
-// Maintain the order of their first appearance in each string
-const uniqueCharactersOf = function (strings) { };
+const extractUniqueChars = function (word) {
+  return [...word].reduce(function (uniqueChars, char) {
+    return !uniqueChars.includes(char) ? uniqueChars + char : uniqueChars;
+  }, '');
+};
+
+const uniqueCharactersOf = function (strings) {
+  return strings.map(extractUniqueChars);
+};
 //----------------------------------------------------------------------------
 const range = function (numOfElement) {
   const numbers = [];
@@ -163,68 +164,133 @@ const rangesOf = function (numbers) {
   return numbers.map(range);
 };
 //----------------------------------------------------------------------------
-
-// capitalize first letters of ["hello world", "goodbye moon"] => ["Hello World", "Goodbye Moon"]
-const capitalizedFirstLettersOf = function (strings) { };
-
-// find word lengths in ["apple pie", "banana split"] => [[5, 3], [6, 5]]
-const wordLengthsOf = function (strings) { };
-
-// flatten nested arrays of [[1, [2, 3]], [4, [5, 6]]] => [[1, 2, 3], [4, 5, 6]]
-const flattenedArraysOf = function (arrays) { };
-
-// sort letters in ["cat", "bat", "rat"] alphabetically => ["act", "abt", "art"]
-const sortedLettersOf = function (strings) { };
-
-// wrap strings in brackets ["apple", "banana"] => ["[apple]", "[banana]"]
-const wrappedStringsOf = function (strings) { };
-
-// extract names from [{ name: "Alice" }, { name: "Bob" }] => ["Alice", "Bob"]
-const extractNames = function (objects) { };
-
-// extract ages from [{ age: 25 }, { age: 30 }] => [25, 30]
-const extractAges = function (objects) { };
-
-// extract the first letters of names from [{ name: "Alice" }, { name: "Bob" }] => ["A", "B"]
-const firstLettersOfNames = function (objects) { };
-
-// calculate areas from [{ width: 2, height: 3 }, { width: 4, height: 5 }] => [6, 20]
-const calculateAreas = function (rectangles) { };
-
-// extract boolean flags from [{ active: true }, { active: false }] => [true, false]
-const extractFlags = function (objects) { };
-
-// concatenate first and last names from [{ firstName: "Alice", lastName: "Smith" }, { firstName: "Bob", lastName: "Brown" }] => ["Alice Smith", "Bob Brown"]
-const fullNames = function (objects) { };
-
-// calculate total prices from [{ price: 10, quantity: 2 }, { price: 5, quantity: 4 }] => [20, 20]
-// (price * quantity)
-const totalPrices = function (objects) { };
-
-// determine if a person is an adult from [{ name: "Alice", age: 17 }, { name: "Bob", age: 22 }] => [false, true]
-// (age >= 18)
-const isAdult = function (objects) { };
-
+const capitalizedFirstLettersOf = function (strings) { //dirty
+  return strings.map(function (words) {
+    return words.split(' ').map(function (word) {
+      return word[0].toUpperCase() + word.slice(1);
+    });
+  });
+};
+//----------------------------------------------------------------------------
+const wordLengthsOf = function (strings) {
+  return strings.map(function (words) {
+    return words.split(' ').map(function (word) {
+      return word.length;
+    });
+  });
+};
+//----------------------------------------------------------------------------
+const flattenedArraysOf = function (arrays) {
+  return arrays.map(function (array) {
+    return array.flat();
+  });
+};
+//----------------------------------------------------------------------------
+const sortedLettersOf = function (strings) {
+  return strings.map(function (str) {
+    return [...str].sort().join('');
+  });
+};
+//----------------------------------------------------------------------------
+const wrappedStringsOf = function (strings) {
+  return strings.map(function (string) {
+    return '[' + string + ']';
+  });
+};
+//----------------------------------------------------------------------------
+const extractNames = function (objects) {
+  return objects.map(function (obj) {
+    return obj.name;
+  });
+};
+//----------------------------------------------------------------------------
+const extractAges = function (objects) {
+  return objects.map(function (obj) {
+    return obj.age;
+  });
+};
+//----------------------------------------------------------------------------
+const firstLettersOfNames = function (objects) {
+  return objects.map(function (obj) {
+    return obj.name[0];
+  });
+};
+//----------------------------------------------------------------------------
+const calculateAreas = function (rectangles) {
+  return rectangles.map(function (rect) {
+    return rect.width * rect.height;
+  });
+};
+//----------------------------------------------------------------------------
+const extractFlags = function (objects) {
+  return objects.map(function (obj) {
+    return obj.active;
+  });
+};
+//----------------------------------------------------------------------------
+const fullNames = function (objects) {
+  return objects.map(function (obj) {
+    return obj.firstName + ' ' + obj.lastName;
+  });
+};
+//----------------------------------------------------------------------------
+const totalPrices = function (objects) {
+  return objects.map(function (product) {
+    return product.price * product.quantity;
+  });
+};
+//----------------------------------------------------------------------------
+const isAdult = function (objects) {
+  return objects.map(function (person) {
+    return person.age >= 18;
+  });
+};
+//----------------------------------------------------------------------------
 // create abbreviations from [{ city: "New York", country: "USA" }, { city: "Los Angeles", country: "USA" }] => ["NY, USA", "LA, USA"]
-const abbreviations = function (objects) { };
-
-// extract scores for math tests from [{ name: "Alice", scores: { math: 90, english: 85 } }, { name: "Bob", scores: { math: 80, english: 75 } }] => [90, 80]
-const mathScores = function (objects) { };
-
-// extract coordinates from [{ x: 1, y: 2 }, { x: 3, y: 4 }] => [[1, 2], [3, 4]]
-const extractCoordinates = function (objects) { };
-
-// extract full name and age from [{ firstName: "Alice", lastName: "Smith", age: 25 }, { firstName: "Bob", lastName: "Brown", age: 30 }] => [["Alice Smith", 25], ["Bob Brown", 30]]
-const fullNameAndAge = function (objects) { };
-
-// extract scores from [{ name: "Alice", scores: { math: 90, english: 85 } }, { name: "Bob", scores: { math: 80, english: 75 } }] => [[90, 85], [80, 75]]
-const extractScores = function (objects) { };
-
-// extract key-value pairs from [{ key: "a", value: 1 }, { key: "b", value: 2 }] => [["a", 1], ["b", 2]]
-const keyValuePairs = function (objects) { };
-
-// split full names into first and last names from [{ name: "Alice Smith" }, { name: "Bob Brown" }] => [["Alice", "Smith"], ["Bob", "Brown"]]
-const splitFullNames = function (objects) { };
+const abbreviations = function (objects) {  //remaining
+  return objects.map(function (obj) {
+    return obj.city.split(' ').map(function (words) {
+      return words[0].toUpperCase();
+    }).join('');
+  });
+};
+//----------------------------------------------------------------------------
+const mathScores = function (objects) {
+  return objects.map(function (obj) {
+    return obj.scores.math;
+  });
+};
+//----------------------------------------------------------------------------
+const extractCoordinates = function (objects) {
+  return objects.map(function (obj) {
+    return [obj.x, obj.y];
+  });
+};
+//----------------------------------------------------------------------------
+const fullNameAndAge = function (objects) {
+  return objects.map(function (obj) {
+    return [obj.firstName + ' ' + obj.lastName, obj.age];
+  });
+};
+//----------------------------------------------------------------------------
+const extractScores = function (objects) {
+  return objects.map(function (obj) {
+    return [obj.scores.math, obj.scores.english];
+  });
+};
+//----------------------------------------------------------------------------
+const keyValuePairs = function (objects) {
+  return objects.map(function (obj) {
+    return [obj.key, obj.value];
+  });
+};
+//----------------------------------------------------------------------------
+const splitFullNames = function (objects) {
+  return objects.map(function (person) {
+    return person.name.split(' ');
+  });
+};
+//----------------------------------------------------------------------------
 
 // normalize scores so they fall between 0 and 1 based on the max score from [{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }] => [0.8, 1]
 const normalizeScores = function (objects) { };
