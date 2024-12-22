@@ -28,31 +28,44 @@ const maxOf = function (numbers) {
   }, -Infinity);
 };
 //------------------------------------------------------------------------------
-const sumPositiveNumbers = function (numbers) {
+const getAllPositives = function (numbers) {
   return numbers.filter(function (number) {
     return number > 0;
-  }).
-    reduce(function (sum, number) {
-      return sum + number;
-    }, 0);
+  });
+};
+
+const sumPositiveNumbers = function (numbers) {
+  const allPositives = getAllPositives(numbers);
+  return allPositives.reduce(function (sum, number) {
+    return sum + number;
+  }, 0);
 };
 //------------------------------------------------------------------------------
-const sumOfSquares = function (numbers) {
+const getSquares = function (numbers) {
   return numbers.map(function (number) {
     return number * number;
-  }).
-    reduce(function (sum, number) {
-      return sum + number;
-    }, 0);
+  });
+};
+
+const sumOfSquares = function (numbers) {
+  const squares = getSquares(numbers);
+  return squares.reduce(function (sum, number) {
+    return sum + number;
+  }, 0);
 };
 //------------------------------------------------------------------------------
-const sumOfOddNumbers = function (numbers) {
+const getOdds = function (numbers) {
   return numbers.filter(function (number) {
     return (number & 1) === 1;
-  }).
-    reduce(function (sum, number) {
-      return sum + number;
-    }, 0);
+  });
+};
+
+const sumOfOddNumbers = function (numbers) {
+  const odds = getOdds(numbers);
+
+  return odds.reduce(function (sum, number) {
+    return sum + number;
+  }, 0);
 };
 //------------------------------------------------------------------------------
 const countNegativeNumbers = function (numbers) {
@@ -61,16 +74,19 @@ const countNegativeNumbers = function (numbers) {
   }, 0);
 };
 //------------------------------------------------------------------------------
-const findSumOfEvenSquares = function (numbers) {
+const getEvens = function (numbers) {
   return numbers.filter(function (number) {
     return (number & 1) === 0;
-  })
-    .map(function (number) {
-      return Math.pow(number, 2);
-    })
-    .reduce(function (sum, number) {
-      return sum + number;
-    }, 0);
+  });
+};
+
+const findSumOfEvenSquares = function (numbers) {
+  const evens = getEvens(numbers);
+  const squares = getSquares(evens);
+
+  return squares.reduce(function (sum, number) {
+    return sum + number;
+  }, 0);
 };
 //------------------------------------------------------------------------------
 const concatenateWords = function (words) {
