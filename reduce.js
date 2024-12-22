@@ -166,7 +166,7 @@ const flattenArray = function (arrays) {
   return arrays.flat();
 };
 //------------------------------------------------------------------------------
-const uniqueNumbers = function (numbers) {
+const uniqueElements = function (numbers) {
   return numbers.reduce(function (uniqueNums, number) {
     if (!uniqueNums.includes(number)) {
       uniqueNums.push(number);
@@ -177,22 +177,45 @@ const uniqueNumbers = function (numbers) {
 //------------------------------------------------------------------------------
 // groupByLength(["apple", "banana", "cherry", "date"]) => { 5: ["apple", "cherry"], 6: ["banana"], 4: ["date"] }
 const groupByLength = function (strings) { };
+//------------------------------------------------------------------------------
+const countOccurencesOf = function (strings, target) {
+  return strings.reduce(function (count, str) {
+    return str === target ? count + 1 : count;
+  }, 0);
+};
 
-// countOccurrences(["apple", "banana", "cherry", "banana"]) => { apple: 1, banana: 2, cherry: 1 }
-const countOccurrences = function (strings) { };
+const countOccurrences = function (strings) {
+  const uniqueWords = uniqueElements(strings);
 
+  return uniqueWords.map(function (word) {
+    return { [word]: countOccurencesOf(strings, word) };
+  });
+};
+//------------------------------------------------------------------------------
 // mergeObjects([{ a: 1, b: 2 }, { b: 3, c: 4 }, { a: 5 }]) => { a: 6, b: 5, c: 4 }
 const mergeObjects = function (objects) { };
-
-// zip(["a", "b", "c"], [1, 2, 3]) => { "a": 1, "b": 2, "c": 3 }
-const zip = function (keys, values) { };
-
-// makeObject(["city", "country"], ["Paris", "France"]) => { "city": "Paris", "country": "France" }
-const makeObject = function (keys, values) { };
-
+//------------------------------------------------------------------------------
+const zip = function (keys, values) {
+  return keys.reduce(function (object, key, index) {
+    object[key] = values[index];
+    return object;
+  }, {});
+};
+//------------------------------------------------------------------------------
+const makeObject = function (keys, values) {
+  return keys.reduce(function (object, key, index) {
+    object[key] = values[index];
+    return object;
+  }, {});
+};
+//------------------------------------------------------------------------------
 // invertObject({ "a": 1, "b": 2, "c": 3 }) => { 1: "a", 2: "b", 3: "c" }
-const invertObject = function (obj) { };
-
+const invertObject = function (obj) {
+  const keys = Object.keys(obj);
+  const values = Object.values(obj);
+  return makeObject(values, keys);
+};
+//------------------------------------------------------------------------------
 // mergeArrays([["a", 1], ["b", 2]], [["c", 3], ["d", 4]]) => { "a": 1, "b": 2, "c": 3, "d": 4 }
 const mergeArrays = function (arr1, arr2) { };
 
@@ -266,7 +289,11 @@ const cartesianProduct = function (arr1, arr2) { };
 const groupByDate = function (records) { };
 
 // findMinMax([1, 2, 3, 4, 5]) => { min: 1, max: 5 }
-const findMinMax = function (numbers) { };
+const findMinMax = function (numbers) {
+  const smallest = minOf(numbers);
+  const largest = maxOf(numbers);
+  return { min: smallest, max: largest };
+};
 
 // sumByCategory([{ category: 'A', value: 10 }, { category: 'B', value: 20 }, { category: 'A', value: 30 }]) => { A: 40, B: 20 }
 const sumByCategory = function (items) { };
