@@ -247,7 +247,7 @@ const isAdult = function (objects) {
 };
 //----------------------------------------------------------------------------
 // create abbreviations from [{ city: "New York", country: "USA" }, { city: "Los Angeles", country: "USA" }] => ["NY, USA", "LA, USA"]
-const abbreviations = function (objects) {  //remaining
+const abbreviations = function (objects) {  //remaining ----
   return objects.map(function (obj) {
     return obj.city.split(' ').map(function (words) {
       return words[0].toUpperCase();
@@ -261,8 +261,8 @@ const mathScores = function (objects) {
   });
 };
 //----------------------------------------------------------------------------
-const extractCoordinates = function (objects) {
-  return objects.map(function (obj) {
+const extractCoordinates = function (coordinates) {
+  return coordinates.map(function (obj) {
     return [obj.x, obj.y];
   });
 };
@@ -285,22 +285,45 @@ const keyValuePairs = function (objects) {
   });
 };
 //----------------------------------------------------------------------------
-const splitFullNames = function (objects) {
-  return objects.map(function (person) {
+const splitFullNames = function (people) {
+  return people.map(function (person) {
     return person.name.split(' ');
   });
 };
 //----------------------------------------------------------------------------
+const normalizeScores = function (students) {
+  return students.map(function (student) {
+    return student.score / 100;
+  });
+};
+//----------------------------------------------------------------------------
+const calculateTotal = function (numbers) {
+  return numbers.reduce(function (sum, num) {
+    return sum + num;
+  }, 0);
+};
 
-// normalize scores so they fall between 0 and 1 based on the max score from [{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }] => [0.8, 1]
-const normalizeScores = function (objects) { };
+const percentageContributions = function (numbers) {
+  const total = calculateTotal(numbers);
+  return numbers.map(function (number) {
+    return (number / total) * 100;
+  });
+};
+//----------------------------------------------------------------------------
+const minOf = function (numbers) {
+  return numbers.reduce(function (min, number) {
+    return number < min ? number : min;
+  }, Infinity);
+};
 
-// calculate percentage contribution of each number in [10, 20, 30] (relative to the total sum) => [16.67, 33.33, 50]
-const percentageContributions = function (numbers) { };
+const subtractMin = function (numbers) {
+  const smallestNum = minOf(numbers);
 
-// subtract the smallest number from each number in [3, 8, 1] => [2, 7, 0]
-const subtractMin = function (numbers) { };
-
+  return numbers.map(function (num) {
+    return num - smallestNum;
+  });
+};
+//----------------------------------------------------------------------------
 // calculate ranks (1-based, descending) for scores in [{ name: "Alice", score: 80 }, { name: "Bob", score: 100 }, { name: "Charlie", score: 90 }] => [2, 1, 3]
 const calculateRanks = function (objects) { };
 
