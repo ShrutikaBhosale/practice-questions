@@ -209,24 +209,36 @@ const makeObject = function (keys, values) {
   }, {});
 };
 //------------------------------------------------------------------------------
-// invertObject({ "a": 1, "b": 2, "c": 3 }) => { 1: "a", 2: "b", 3: "c" }
 const invertObject = function (obj) {
   const keys = Object.keys(obj);
   const values = Object.values(obj);
   return makeObject(values, keys);
 };
 //------------------------------------------------------------------------------
-// mergeArrays([["a", 1], ["b", 2]], [["c", 3], ["d", 4]]) => { "a": 1, "b": 2, "c": 3, "d": 4 }
-const mergeArrays = function (arr1, arr2) { };
+const merge = function (data, obj) {
+  return data.reduce(function (object, array) {
+    object[array[0]] = array[1];
+    return object;
+  }, obj);
+};
 
+const mergeArrays = function (arr1, arr2) {
+  const firstArrayMerged = merge(arr1, {});
+  const secondArrayMerged = merge(arr2, firstArrayMerged);
+  return secondArrayMerged;
+};
+//------------------------------------------------------------------------------
 // groupByProperty([{name: "John", age: 25}, {name: "Jane", age: 30}]) => { 25: [{name: "John", age: 25}], 30: [{name: "Jane", age: 30}] }
 const groupByProperty = function (objects) { };
-
+//------------------------------------------------------------------------------
 // ascendingGroups([1,2,3,4,3,4,5,10,6,7,8,9]) => [[1,2,3,4],[3,4,5],[10],[6,7,8,9]]
 const ascendingGroups = function (numbers) { };
-
+//------------------------------------------------------------------------------
 // flattenToObject([['a', 1], ['b', 2], ['c', 3]]) => { a: 1, b: 2, c: 3 }
-const flattenToObject = function (pairs) { };
+const flattenToObject = function (pairs) {
+  return merge(pairs, {});
+};
+//------------------------------------------------------------------------------
 
 // longestString(["apple", "banana", "cherry", "dates"]) => "banana"
 const longestString = function (strings) { };
