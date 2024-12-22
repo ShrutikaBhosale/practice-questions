@@ -272,7 +272,15 @@ const equalChunksOfAtLeast = function (numbers) { };
 const groupByType = function (array) { };
 
 // runningAverages([1, 2, 3, 4]) => [1, 1.5, 2, 2.5]
-const runningAverages = function (numbers) { };
+const runningAverages = function (numbers) {
+  // const runningAvg = numbers.reduce(function (sum, number) {
+  //   const total = sum.at(-1) !== undefined ? sum.at(-1) + number : number;
+  //   sum.push(total / (sum.length + 1));
+  //   return sum;
+  // }, []);
+
+  // return runningAvg;
+};
 
 // flattenObject({a: {b: {c: 1}}, d: {e: 2}}) => { 'a.b.c': 1, 'd.e': 2 }
 const flattenObject = function (obj) { };
